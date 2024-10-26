@@ -23,7 +23,7 @@
     };
     ```
 3. I was using old and depreacated openai functions needed to update that.
-4. To compare and get the content of both the url's for complicance check. I used cheerio to scrapte pages and pass it to our model assuming both of them were static websites.
+4. To compare and get the content of both the url's for complicance check. I used ```cheerio``` to scrape pages and pass it to our model assuming both of them were static websites.
 5. When all was set and the server was up, I hit the api and it was throwing error for maximum token size. Since I didn't do any preprocessing on the html content I loaded, it extracted lot of unnecessary data.
 6. To tackle that, I created method to extract all innerText of html . I removed all html tag which not visible and then extracted all the text under the body tag.
 7. Another challenge was, stripe page is not static and loads dynamically. To handle that I found ```puppeteer``` library. It loads the page in headless browser and that's how I extracted the data for policy which was under ```Doc``` class on that page.
