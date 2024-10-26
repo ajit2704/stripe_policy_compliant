@@ -12,7 +12,7 @@
   "compliance_policy": "https://stripe.com/docs/treasury/marketing-treasury"
 }' ```
 
-## How did I arrived at this solution
+## How did I arrived at this solution?
 
 1. Since, the emphasis on typescript, I chose to code in it. Never had to write with ```express``` before, but it was lot easier.
 2. Initially express was throwing error for with express as I was using Request and Response object. Realized that I have to handle errors for unresolved promises. So, found on stackoverflow a neat function to avoid any further issue:
@@ -30,3 +30,12 @@
 8. Finally when my request was hitting the openai api, I needed to do some tweaking as per openai chat api docs. Initially I realized that models like ```3.5-turbo``` throws very inconsistent reponse. In one it was compliant in another it was not.
 9. So, altogether decided to use ```4-0```, which was more insightful. 
 
+## Need to improve
+
+1. ### Performance:
+    a. Puppeteer actually loads the page and so it has longer turnaround time
+    b. OpenAi turnaround time is higher
+2. ### Prompt:
+    a. Prompt can be more precise and objective.
+3. ### Response handling:
+    a. Need to check on diverse dataset and gather possible scenarios for better response handling.
