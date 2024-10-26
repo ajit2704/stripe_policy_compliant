@@ -32,7 +32,7 @@ const checkCompliance = async (content: string, policy: string): Promise<string>
     const response : any = await openai.chat.completions.create({
      messages: [{role: 'user', name: 'check_compliance', content: prompt}],
      model: "gpt-3.5-turbo"    });
-    return response.data || 'No issues found';
+    return response || 'No issues found';
   } catch (error : any) {
     throw new Error(`Error checking compliance: ${error.message}`);
   }

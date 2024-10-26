@@ -14,7 +14,6 @@ const fetchWithAxios = async (url: string): Promise<string> => {
     // Select all text content from the body (or modify this selector as needed)
     let textContent = $('body').text().trim();
     textContent = textContent.replace(/\s+/g, ' ').trim();
-    console.log(textContent);
     if (textContent) {
       return textContent;
     } else {
@@ -43,7 +42,6 @@ const fetchWithPuppeteer = async (url: string): Promise<string> => {
     if (!textContent) {
       throw new Error('No content found with Puppeteer');
     }
-    // console.log(textContent);
     return textContent;
   } catch (error : any) {
     console.error(`Puppeteer Error: ${error.message}`);
