@@ -3,6 +3,9 @@ import  { OpenAI } from 'openai';
 import dotenv from 'dotenv';
 import { fetchCompliancePolicyContent } from './complianceChecker';
 import { fetchWebpageContent } from './fetchWebPage';
+import { Axios, AxiosResponse } from 'axios';
+import { sanitizeText } from './utils';
+
 
 // Load environment variables
 dotenv.config();
@@ -31,8 +34,8 @@ const checkCompliance = async (content: string, policy: string): Promise<string>
   try {
     const response : any = await openai.chat.completions.create({
      messages: [{role: 'user', name: 'check_compliance', content: prompt}],
-     model: "gpt-3.5-turbo"    });
-    return response || 'No issues found';
+     model: "gpt-4o"    });
+    return sanitizeText(response.choices[0].message.content) || 'No findings found';
   } catch (error : any) {
     throw new Error(`Error checking compliance: ${error.message}`);
   }
@@ -49,12 +52,10 @@ app.post('/check_compliance', asyncHandler(async (req: Request, res: Response) =
   try {
     // Step 1: Fetch the webpage content
     const content = await fetchWebpageContent(webpage_url);
-    console.log(content);
     // Step 2: Fetch the compliance policy content
     const policyContent = await fetchCompliancePolicyContent(compliance_policy );
-    console.log(policyContent);
     // Step 3: Compare the content with the compliance policy
-    const findings = await checkCompliance(content, policyContent);
+    const findings  = await checkCompliance(content, policyContent);
     // Step 4: Return the findings
     res.json({
       webpage_url,
